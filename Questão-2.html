@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <title>Questão 2</title>
+    <style>
+        td,
+        th,
+        table {
+            border: 1px solid #727272;
+        }
+
+        td,
+        th,
+        thead,
+        tbody,
+        table {
+            background-color: transparent;
+        }
+
+        table {
+            /* referencia das bordas https://www.w3schools.com/cssref/playdemo.php?filename=playcss_border-collapse*/
+            border-collapse: collapse;
+        }
+
+        body {
+            /*imagem de funda da pagina*/
+            background: url("https://upload.wikimedia.org/wikipedia/pt/a/ac/CRVascodaGama.png") no-repeat center center fixed;
+            display: flex;
+            flex-direction: column;
+            margin: 0;
+            height: 100vh;
+            justify-content: center;
+            align-items: center;
+        }
+
+        /* Referencia das linhas https://www.w3.org/Style/Examples/007/evenodd.pt_BR.html*/
+        tr:nth-child(even) {
+            background: #000000;
+            color: white
+        }
+
+        tr:nth-child(odd) {
+            background: #FFF
+        }
+
+        th {
+            background: green;
+        }
+
+        th,
+        td {
+            padding: 10px;
+        }
+    </style>
+</head>
+
+<body>
+    <table>
+        <!--referecia da tabela https://developer.mozilla.org/pt-BR/docs/Web/HTML/Reference/Elements/table-->
+        <thead>
+            <TR>
+                <th>
+                    Produto
+                </th>
+                <th>
+                    Descrição
+                </th>
+                <th>
+                    Tipo de Ingresso
+                </th>
+                <th>
+                    Preço (R$)
+                </th>
+            </TR>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Ingresso para o vasco em SP</td>
+                <td>Vasco da Gama Vs Flamengo</td>
+                <td>Genérico</td>
+                <td> R$ 1.000,00</td>
+            </tr>
+            <tr>
+                <td>Ingresso para o vasco em RJ</td>
+                <td>Vasco da Gama Vs Botafogo</td>
+                <td>Genérico</td>
+                <td> R$ 200,00</td>
+            </tr>
+            <tr>
+                <td>Ingresso para o vasco em MA</td>
+                <td>Vasco da Gama Vs Sampaio Corrêa</td>
+                <td>Genérico</td>
+                <td>R$ 500</td>
+            </tr>
+            <tr>
+                <td>Ingresso para o vasco em PI</td>
+                <td>Vasco da Gama Vs Flamengo do Piauí</td>
+                <td>Genérico</td>
+                <td>Gratis</td>
+            </tr>
+            <tr>
+                <td>Ingresso para o vasco em BH</td>
+                <td>Vasco da Gama Vs Bahia</td>
+                <td>Genérico</td>
+                <td> R$ 100,00</td>
+            </tr>
+        </tbody>
+    </table>
+
+</body>
+
+</html>
