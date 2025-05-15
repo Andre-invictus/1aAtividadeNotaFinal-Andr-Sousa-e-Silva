@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <title>Questão 3</title>
+    <style>
+        /* Definir fonte padrão para tudo */
+        body, textarea, input {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .contem-erro {
+            border: 1px solid #ff0000;
+        }
+        .mensagem-ajuda-erro {
+            /* estilização da mensagem de erro */
+            color: red;
+            display: none;
+            margin-left: auto;
+            margin-right: auto;
+            margin-top: 5px;
+            padding: 10px;
+        }
+        .campo input, .campo textarea {
+            display: block;
+            border-radius: 5px;
+            border-width: 1px;
+            margin-top: 10px;
+            margin-bottom: 10px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 10px;
+        }
+
+        .campo input, .campo textarea, button, .mensagem-ajuda-erro {
+            width: 200px;
+        }
+        .campo textarea {
+            height: 100px; /* aproxidamente 5 linhas */
+            resize: none; /* bloqueia redimensionamento pq ficava bugando o tempo todo e não sei como arrumar isso 🥲 */
+        }
+
+        .centralizado {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        form {
+            border: 2px solid #777;
+            border-radius: 10px;
+            padding: 15px;
+            box-shadow: 0px 0px 15px #333;
+        }
+
+        button {
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+            margin-bottom: 10px;
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            padding: 12px;
+            border-radius: 4px;
+        }
+
+        button:hover {
+            background-color: #0056b3;
+        }
+
+    </style>
+    <script>
+        /* Função que valida o campo e atribui classe para indicar erros */
+        function validarCampo(evento, idMensagem) {
+            let mensagemErroNome = document.getElementById(idMensagem);
+            let campoNome = evento.currentTarget;
+            campoNome.classList.add('foi-validado');
+
+            if (campoNome.value == null || campoNome.value == '') {
+                // adicionando classe de erro no input
+                campoNome.classList.add('contem-erro');
+                // exibir o elemento que possui a mensagem de erro
+                mensagemErroNome.style.display = 'block';
+                formularioComErros = true;
+            } else {
+                if (campoNome.classList.contains('contem-erro')) {
+                    // retirando o erro pois o campo é válido
+                    campoNome.classList.remove('contem-erro')
+                    mensagemErroNome.style.display = 'none';
+                }
+            }
+        }
+
+        /* 
+          Função que verifica se tem algum campo do formulário que tem a classe 'contem-erro', que indica que o campo foi validado e apresenta erro
+          Se existir algum campo com essa classe então o formulário tem erro
+        */
+        function contemErrosNoFormulario(formulario) {
+            let campoNome = formulario.elements['nome'];
+            let campoEmail = formulario.elements['email'];
+            let campoMensagem = formulario.elements['mensagem'];
+            let formularioComErros = false;
+
+            if (!campoNome.classList.contains('foi-validado') || campoNome.classList.contains('contem-erro')) {
+                formularioComErros = true;
+            }
+
+            if (!campoEmail.classList.contains('foi-validado') || campoEmail.classList.contains('contem-erro')) {
+                formularioComErros = true;
+            }
+
+            if (!campoMensagem.classList.contains('foi-validado') || campoMensagem.classList.contains('contem-erro')) {
+                formularioComErros = true;
+            }
+
+            return formularioComErros;
+        }
+
+        
+        function enviarFormulario(evento) {
+            evento.preventDefault(); // estamos cancelando o envio em todos os casos
+            const formulario = document.getElementById('formulario');
+            if (contemErrosNoFormulario(formulario)) {
+                alert("Formulário tem algum erro");
+            } else {
+                alert("Está tudo certo");
+                // Para enviarmos o formulário, podemos enviar explicitamente
+                // formulario.submit(); 
+            }
+        }
+
+    </script>
+
+</head>
+
+<body>
+    <div class="centralizado">
+        <form id="formulario" method="POST" action="/cadastrar" onsubmit="enviarFormulario(event)">
+            <h1>Formulário de contato</h1>
+            <div class="campo">
+                <input type="text" name="nome" placeholder="Nome" onchange="validarCampo(event, 'mensagem-erro-para-nome')" />
+                <span id="mensagem-erro-para-nome" class="mensagem-ajuda-erro">Campo nome inválido</span>
+            </div>
+            <div class="campo">
+                <input type="email" name="email" placeholder="Email" onchange="validarCampo(event, 'mensagem-erro-para-email')" />
+                <span id="mensagem-erro-para-email" class="mensagem-ajuda-erro">Campo e-mail inválido</span>
+            </div>
+            <div class="campo">
+                <textarea name="mensagem" placeholder="Sua mensagem..." onchange="validarCampo(event, 'mensagem-erro-para-mensagem')" rows="5"></textarea>
+                <span id="mensagem-erro-para-mensagem" class="mensagem-ajuda-erro">Campo mensagem inválido</span>
+            </div>
+            <button type="submit">Enviar formulário</button>
+        </form>
+    </div>
+</body>
+
+</html>
